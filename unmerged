@@ -1,0 +1,1 @@
+alias -g unmerged='$(git ls-files --unmerged | cut -f2 | sort -u | sed -E "s/ /\\\\ /g")'

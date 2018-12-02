@@ -1,0 +1,5 @@
+parse_git_branch() {
+	local r="/$1/p"
+	git branch --no-color 2> /dev/null | sed -n -e $r | sed -e 's/^[* \t]*//' | sed q
+}
+
