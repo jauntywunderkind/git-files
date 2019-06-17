@@ -2,5 +2,6 @@
 commitdd(){
 	# take oldest file
 	git ls-files -om | nohid | xargs ls -tr 2&>/dev/null | read old
-	( lastdd $old ; git add $old ; git commitd )
+	# subshell to preserve file naming
+	( lastdd $old ; git add $old ; git commitd $* )
 }

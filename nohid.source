@@ -1,3 +1,4 @@
+# fake
 nohid(){
 	while read filepath
 	do
