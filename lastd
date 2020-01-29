@@ -1,5 +1,6 @@
 lastd(){
-	local files="$(ls -lAhtr | grep -v "\s\.\.?$" | gv | tail -n1)"
-	[ "$V" -gt 0 ] && echo $files
-	echo $files |  awk '{print $6}'
+	local files=( $(_expando $*) )
+	local found="$(ls -lAhtr $files | grep -v "\s\.\.?$" | gv | tail -n1)"
+	[ "$V" -gt 0 ] && echo $found
+	echo $found |  awk '{print $6}'
 }

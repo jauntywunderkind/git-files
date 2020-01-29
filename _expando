@@ -1,0 +1,8 @@
+# expand all arguments
+_expando(){
+	# iff there are any args
+	if [ "$#" -gt 0 ]
+	then
+		echo ${^~*}*
+	fi
+}
