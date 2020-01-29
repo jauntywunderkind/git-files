@@ -1,14 +1,5 @@
-#!/bin/sh
-
-_lastd(){
-	ls -lahtr | gv | tail -n1 | awk '{print $6}'
+lastd(){
+	local files="$(ls -lAhtr | grep -v "\s\.\.?$" | gv | tail -n1)"
+	[ "$V" -gt 0 ] && echo $files
+	echo $files |  awk '{print $6}'
 }
-
-if [ "x$1" = "x-s" ]
-then
-	echo export d=\"$(_lastd)\"
-else
-	_lastd
-fi
-
-
