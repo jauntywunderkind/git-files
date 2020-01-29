@@ -1,0 +1,5 @@
+_gmodified(){
+	git ls-files --modified | cut -f2 | sort -u | sed -E "s/ /\\\\ /g"
+}
+
+

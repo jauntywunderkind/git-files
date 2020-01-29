@@ -1,0 +1,2 @@
+_lastdd() { _files  }
+compdef _lastdd lastdd
