@@ -1,3 +1,4 @@
 lastdd(){
 	export d="$(lastd $*)"
+	[ "$V" -gt 1 ] && echo export d=\"$d" >&2
 }

@@ -1,6 +1,6 @@
 lastd(){
 	local files=( $(_expando $*) )
 	local found="$(ls -lAhtr $files | grep -v "\s\.\.?$" | gv | tail -n1)"
-	[ "$V" -gt 0 ] && echo $found
+	[ "$V" -gt 10 ] && echo $found >&2
 	echo $found |  awk '{print $6}'
 }
