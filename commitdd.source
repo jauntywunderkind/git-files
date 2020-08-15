@@ -1,18 +1,15 @@
 # take oldest file & commit it
 commitdd(){
 	# take oldest file
-	git ls-files -om | nohid | xargs ls -tr 2&>/dev/null | {
-		while read old
-		do
-			# subshell to preserve file naming
-			if ( lastdd $old ; git add $old ; git commitd $* )
-			then
-				return 0
-			fi
-			git restore --staged $old
-			# not successful, go to next file
-		done
-		# nothing committed
-		return 1
-	}
+	while read old
+	do
+		# subshell to preserve file naming
+		if ( lastdd $old ; git add $old ; git commitd $* )
+		then
+			return 0
+		fi
+		# not successful, go to next file
+		git restore --staged $old
+	done <(git ls-files -om | nohid | xargs ls -tr 2&>/dev/null)
+	return 1
 }
