@@ -10,6 +10,6 @@ commitdd(){
 		fi
 		# not successful, go to next file
 		git restore --staged $old
-	done <(git ls-files -om | nohid | xargs ls -tr 2&>/dev/null)
+	done < <(git ls-files -om | nohid | xargs ls -tr 2>/dev/null)
 	return 1
 }
