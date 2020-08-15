@@ -1,0 +1,10 @@
+nohid(){
+	while read filepath
+	do
+		base=$(basename $filepath)
+		if grep -v '^\.' -q
+		then
+			echo $filepath
+		fi <<< "$base"
+	done
+}
