@@ -1,10 +1,6 @@
+# take oldest file & commit it
 commitdd(){
-	# hazard: xargs will not work with removed
-	git ls-files -om | nohid | grep -v '/\.' | xargs ls -tr 2&>/dev/null | {
-		while read file
-		do
-			# ok nice attempt but no way to 'pause' script here that i know of & launch a git commit with editor
-			echo $file
-		done
-	}
+	# take oldest file
+	git ls-files -om | nohid | xargs ls -tr 2&>/dev/null | read old
+	( lastdd $old ; git add $old ; git commitd )
 }
