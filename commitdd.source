@@ -1,18 +1,19 @@
-# old
 # take oldest file & commit it
 commitdd(){
-	# take oldest file
-	while read old
+	for file in $(git ls-files -om | nohid | xargs ls -tr 2>/dev/null)
 	do
-		lastdd $old
-		git add $old
-		git commit $*
+		# take oldest file
+		# add file
+		git add $file
+		# commit it, with file date
+		local d=$(ls -l $file | awk '{print $6}')
+		GIT_AUTHOR_DATE="$d" GIT_COMMITTER_DATE="$d" git commit
 		if [ "$?" = "0" ]
 		then
 			return 0
 		fi
 		# not successful, go to next file
-		git restore --staged $old
-	done < <(git ls-files -om | nohid | xargs ls -tr 2>/dev/null)
+		git restore --staged $file
+	done
 	return 1
 }
