@@ -1,10 +1,13 @@
+# old
 # take oldest file & commit it
 commitdd(){
 	# take oldest file
 	while read old
 	do
-		# subshell to preserve file naming
-		if ( lastdd $old ; git add $old ; git commitd $* )
+		lastdd $old
+		git add $old
+		git commit $*
+		if [ "$?" = "0" ]
 		then
 			return 0
 		fi
