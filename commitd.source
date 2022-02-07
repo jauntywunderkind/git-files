@@ -1,0 +1,13 @@
+commitd(){
+	# todo: try autocompleteing
+	[ ! -e $1 ] && return 1
+
+	# find d
+	lastd $*
+
+	git add $*
+	GIT_COMMITTER_DATE="$d" GIT_AUTHOR_DATE="$d" git commit
+}
+
+_commitd() { _files }
+compdef _commitd commitd
